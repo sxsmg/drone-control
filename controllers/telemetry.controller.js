@@ -1,3 +1,4 @@
+const { emptyQuery } = require("pg-protocol/dist/messages.js");
 const Telemetry = require("../models/mongo/telemetry.model");
 const { broadcastTelemetry } = require("../websocket/telemetry.ws");
 

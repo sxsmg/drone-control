@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const telemetryController = require('../controllers/telemetry.controller');
+const { createTelemetryValidator } = require('../validators/telemetry.validator');
+const validate = require('../middlewares/validate');
 
-router.post('/telemetry', telemetryController.ingestTelemetry);
-// router.get('/drones/:id/telemetry', telemetryController.getTelemetryByDrone);
+router.post('/telemetry', createTelemetryValidator, validate, telemetryController.ingestTelemetry);
 
 module.exports = (app) => app.use(router);
