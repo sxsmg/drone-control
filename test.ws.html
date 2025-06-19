@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Drone Telemetry WebSocket Test</title>
+</head>
+<body>
+  <h2>WebSocket Telemetry Viewer</h2>
+  <input id="droneId" placeholder="Enter Drone ID" />
+  <button onclick="subscribe()">Subscribe</button>
+  <pre id="output"></pre>
+
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <script>
+    const socket = io("http://localhost:3000");
+
+    function subscribe() {
+      const droneId = document.getElementById("droneId").value;
+      socket.emit("subscribe", droneId);
+    }
+
+    socket.on("telemetry", data => {
+      const out = document.getElementById("output");
+      out.textContent += `\n[Telemetry] ${JSON.stringify(data, null, 2)}`;
+    });
+
+    socket.on("connect", () => {
+      console.log("Connected to WebSocket server");
+    });
+
+    socket.on("disconnect", () => {
+      console.log("Disconnected from WebSocket server");
+    });
+  </script>
+</body>
+</html>
