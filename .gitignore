@@ -1,0 +1,16 @@
+# Node.js
+node_modules/
+.env
+dist/
+coverage/
+npm-debug.log
+
+# Logs
+*.log
+
+# DB and editor settings
+*.sqlite
+*.db
+.vscode/
+.idea/
+.DS_Store
